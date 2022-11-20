@@ -3,17 +3,16 @@ MAINTAINER firefly "service@t-firefly.com"
 ENV DEBIAN_FRONTEND=noninteractive
 #COPY ./qemu-aarch64-static /usr/bin
 RUN cp -a /etc/apt/sources.list /etc/apt/sources.list.bak
-RUN sed -i 's@http://.*ubuntu.com@http://repo.huaweicloud.com@g' /etc/apt/sources.list
-RUN apt update
+RUN sed -i 's@http://.*ubuntu.com@http://repo.huaweicloud.com@g' /etc/apt/sources.list && apt update
 RUN apt install -y build-essential \
 	bash-completion vim sudo locales time rsync bc python
-RUN apt install -y repo git ssh libssl-dev liblz4-tool \
-	expect patchelf chrpath gawk texinfo diffstat binfmt-support \
-	qemu-user-static live-build bison flex fakeroot cmake \
+RUN apt install -y repo git libssl-dev liblz4-tool \
+	expect-dev patchelf chrpath gawk texinfo diffstat binfmt-support \
+	live-build bison flex fakeroot cmake \
 	unzip device-tree-compiler python-pip ncurses-dev python-pyelftools \
 	subversion asciidoc w3m dblatex graphviz python-matplotlib cpio \
-	libparse-yapp-perl default-jre patchutils swig expect-dev u-boot-tools
-RUN apt update && apt install -y -f 
+	libparse-yapp-perl default-jre patchutils swig u-boot-tools
+RUN apt update && apt install -y -f
 # language support
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
